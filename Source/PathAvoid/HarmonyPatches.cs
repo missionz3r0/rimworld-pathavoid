@@ -6,7 +6,7 @@ using Verse;
 namespace PathAvoid
 {
     [StaticConstructorOnStartup]
-    class HarmonyPatches
+    public static class HarmonyPatches
     {
         static HarmonyPatches()
         {
@@ -14,8 +14,6 @@ namespace PathAvoid
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             Log.Message("Path Avoid: Adding Harmony Postfix to PawnUtility.GetAvoidGrid()");
-            //Log.Message("MapGenerator.GenerateMap")
-            //Log.Message("MapGenerator.ExposeData")
 
         }
     }
