@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.5", "PathAvoid/1.5.csproj", "{F6B18E29-A191-428E-9BF5-2179147287BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Path Avoid 1.5", "PathAvoid/1.5.csproj", "{F6B18E29-A191-428E-9BF5-2179147287BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.4", "PathAvoid/1.4.csproj", "{0BF070B5-3E27-4477-813F-75E099401BE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Path Avoid 1.4", "PathAvoid/1.4.csproj", "{0BF070B5-3E27-4477-813F-75E099401BE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.3", "PathAvoid/1.3.csproj", "{7F38E093-F8EE-4887-9A2E-6F3A9D3FCF30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Path Avoid 1.3", "PathAvoid/1.3.csproj", "{7F38E093-F8EE-4887-9A2E-6F3A9D3FCF30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.2", "PathAvoid/1.2.csproj", "{03287A2D-636B-4146-AA79-DBA23E799E59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Path Avoid 1.2", "PathAvoid/1.2.csproj", "{03287A2D-636B-4146-AA79-DBA23E799E59}"
 EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
