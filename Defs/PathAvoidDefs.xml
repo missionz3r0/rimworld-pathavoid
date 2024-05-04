@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <PathAvoid.PathAvoidDef>
-    <defName>PathAvoidPrefer</defName>
-    <name>Prefer</name>
-    <level>0</level>
     <color>(130,213,255)</color>
     <colorOfIcon>(130,213,255)</colorOfIcon>
+    <defName>PathAvoidPrefer</defName>
     <hotKey>Misc1</hotKey>
+    <level>0</level>
+    <name>Prefer</name>
   </PathAvoid.PathAvoidDef>
+
   <PathAvoid.PathAvoidDef>
-    <defName>PathAvoidNormal</defName>
-    <name>Normal</name>
-    <level>10</level>
     <color>(0,0,0,0)</color>
     <colorOfIcon>(0,255,0)</colorOfIcon>
+    <defName>PathAvoidNormal</defName>
     <hotKey>Misc2</hotKey>
+    <level>10</level>
+    <name>Normal</name>
   </PathAvoid.PathAvoidDef>
+
   <PathAvoid.PathAvoidDef>
-    <defName>PathAvoidDislike</defName>
-    <name>Dislike</name>
-    <level>25</level>
     <color>(255,238,86)</color>
     <colorOfIcon>(255,238,86)</colorOfIcon>
+    <defName>PathAvoidDislike</defName>
     <hotKey>Misc3</hotKey>
+    <level>25</level>
+    <name>Dislike</name>
   </PathAvoid.PathAvoidDef>
+
   <PathAvoid.PathAvoidDef>
-    <defName>PathAvoidHate</defName>
-    <name>Hate</name>
-    <level>50</level>
     <color>(226,136,34)</color>
     <colorOfIcon>(226,134,34)</colorOfIcon>
+    <defName>PathAvoidHate</defName>
     <hotKey>Misc4</hotKey>
+    <level>50</level>
+    <name>Hate</name>
   </PathAvoid.PathAvoidDef>
+
   <PathAvoid.PathAvoidDef>
-    <defName>PathAvoidStrong</defName>
-    <name>Strong</name>
-    <level>200</level>
     <color>(255,0,0)</color>
     <colorOfIcon>(255,0,0)</colorOfIcon>
+    <defName>PathAvoidStrong</defName>
     <hotKey>Misc5</hotKey>
+    <level>200</level>
+    <name>Strong</name>
   </PathAvoid.PathAvoidDef>
 </Defs>
