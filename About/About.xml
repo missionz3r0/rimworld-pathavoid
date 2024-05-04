@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
+  <authors>
+    <li>Kiame Vivacity</li>
+    <li>Missionz3r0</li>
+    <li>Vendan</li>
+  </authors>
   <author>Missionz3r0</author>
   <modVersion IgnoreIfNoMatchingField="True">1.5.4084.20240504Z</modVersion>
   <name>Path Avoid</name>
