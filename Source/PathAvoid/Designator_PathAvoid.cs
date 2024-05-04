@@ -54,7 +54,7 @@ namespace PathAvoid
             this.def = def;
         }
 
-        public override Color IconDrawColor => this.def.color;
+        public override Color IconDrawColor => this.def.colorOfIcon;
 
         public override string Desc => this.def.desc;
 

@@ -5,35 +5,31 @@
     <name>Prefer</name>
     <level>0</level>
     <color>(130,213,255)</color>
-    <display>true</display>
-    <isPrefer>true</isPrefer>
+    <colorOfIcon>(130,213,255)</colorOfIcon>
     <hotKey>Misc1</hotKey>
   </PathAvoid.PathAvoidDef>
   <PathAvoid.PathAvoidDef>
     <defName>PathAvoidNormal</defName>
     <name>Normal</name>
-    <level>0</level>
-    <color>(0,255,0)</color>
-    <display>false</display>
-    <isPrefer>false</isPrefer>
+    <level>10</level>
+    <color>(0,0,0,0)</color>
+    <colorOfIcon>(0,255,0)</colorOfIcon>
     <hotKey>Misc2</hotKey>
   </PathAvoid.PathAvoidDef>
   <PathAvoid.PathAvoidDef>
     <defName>PathAvoidDislike</defName>
     <name>Dislike</name>
     <level>25</level>
-    <color>(255, 238, 86)</color>
-    <display>true</display>
-    <isPrefer>false</isPrefer>
+    <color>(255,238,86)</color>
+    <colorOfIcon>(255,238,86)</colorOfIcon>
     <hotKey>Misc3</hotKey>
   </PathAvoid.PathAvoidDef>
   <PathAvoid.PathAvoidDef>
     <defName>PathAvoidHate</defName>
     <name>Hate</name>
     <level>50</level>
-    <color>(226, 136, 34)</color>
-    <display>true</display>
-    <isPrefer>false</isPrefer>
+    <color>(226,136,34)</color>
+    <colorOfIcon>(226,134,34)</colorOfIcon>
     <hotKey>Misc4</hotKey>
   </PathAvoid.PathAvoidDef>
   <PathAvoid.PathAvoidDef>
@@ -41,8 +37,7 @@
     <name>Strong</name>
     <level>200</level>
     <color>(255,0,0)</color>
-    <display>true</display>
-    <isPrefer>false</isPrefer>
+    <colorOfIcon>(255,0,0)</colorOfIcon>
     <hotKey>Misc5</hotKey>
   </PathAvoid.PathAvoidDef>
   <PathAvoid.MapSettingsDef>

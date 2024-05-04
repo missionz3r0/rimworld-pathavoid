@@ -10,31 +10,10 @@ namespace PathAvoid
     {
         static HarmonyPatches()
         {
-            var harmony = new Harmony("com.pathavoid.rimworld.mod");
+            var harmony = new Harmony("missionz3r0.PathAvoid");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             Log.Message("Path Avoid: Adding Harmony Postfix to PawnUtility.GetAvoidGrid()");
-
-        }
-    }
-
-    [HarmonyPatch(typeof(Game), "InitNewGame")]
-    static class Patch_Game_InitNewGame
-    {
-        [HarmonyPriority(Priority.First)]
-        static void Postfix()
-        {
-            Settings.SetIsPreferEnabled();
-        }
-    }
-
-    [HarmonyPatch(typeof(SavedGameLoaderNow), "LoadGameFromSaveFileNow")]
-    static class Patch_SavedGameLoaderNow_LoadGameFromSaveFileNow
-    {
-        [HarmonyPriority(Priority.First)]
-        static void Postfix()
-        {
-            Settings.SetIsPreferEnabled();
         }
     }
 

@@ -11,11 +11,9 @@ namespace PathAvoid
 
         public string desc;
 
-        public bool display;
-
         public Color color;
 
-        public bool isPrefer;
+        public Color colorOfIcon;
 
         public KeyBindingDef hotKey;
     }

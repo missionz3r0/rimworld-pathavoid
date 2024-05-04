@@ -78,35 +78,6 @@ namespace PathAvoid
 
             int y = 200;
 
-            Widgets.Label(new Rect(20, y, 250, 22), "Enable Preferred (restart required)");
-            bool b = Settings.IsPreferredEnabled;
-            Widgets.Checkbox(new Vector2(260, y), ref Settings.IsPreferredEnabled);
-            if (b != Settings.IsPreferredEnabled)
-            {
-                foreach(PathAvoidDef d in DefDatabase<PathAvoidDef>.AllDefs)
-                {
-                    if (d.defName.Equals("PathAvoidPrefer"))
-                    {
-                        d.display = Settings.IsPreferredEnabled;
-                        break;
-                    }
-                }
-
-                if (Settings.IsPreferredEnabled)
-                {
-                    if (PathAvoidDefNameValue.ContainsKey("Prefer"))
-                        PathAvoidDefNameValue["Prefer"] = "0";
-                    if (PathAvoidDefNameValue.ContainsKey("Normal"))
-                        PathAvoidDefNameValue["Normal"] = "10";
-                }
-                else
-                {
-                    if (PathAvoidDefNameValue.ContainsKey("Normal"))
-                        PathAvoidDefNameValue["Normal"] = "0";
-                }
-            }
-            y += 30;
-
             IEnumerable<PathAvoidDef> avoidPathDefs = DefDatabase<PathAvoidDef>.AllDefs;
             if (PathAvoidDefNameValue.Count == 0)
             {
@@ -116,9 +87,6 @@ namespace PathAvoid
 
             foreach (PathAvoidDef current in avoidPathDefs)
             {
-                if (!Settings.IsPreferredEnabled && current.isPrefer)
-                    continue;
-
                 Widgets.Label(new Rect(20, y, 50, 22), current.name);
 
                 if (PathAvoidDefNameValue.TryGetValue(current.name, out string v))
@@ -152,7 +120,7 @@ namespace PathAvoid
         public static void SetDefaults(Dictionary<string, string> d)
         {
             SetValue(d, "Prefer", "0");
-            SetValue(d, "Normal", "0");
+            SetValue(d, "Normal", "10");
             SetValue(d, "Dislike", "25");
             SetValue(d, "Hate", "50");
             SetValue(d, "Strong", "200");
@@ -175,6 +143,7 @@ namespace PathAvoid
             {
                 if (!PathAvoidDefNameValue.ContainsKey(current.name))
                     continue;
+                    
                 if (int.TryParse(PathAvoidDefNameValue[current.name], out int value))
                 {
                     if (value < 0)
@@ -202,7 +171,6 @@ namespace PathAvoid
     {
         private const string VERSION = "1.5";
         public static string ButtonLocationString = "0";
-        public static bool IsPreferredEnabled = true;
 
         public override void ExposeData()
         {
@@ -211,7 +179,6 @@ namespace PathAvoid
             string version = VERSION;
             Scribe_Values.Look<string>(ref version, "PathAvoid.Version", null, true);
             Scribe_Values.Look<string>(ref ButtonLocationString, "PathAvoid.ButtonOrder", "0", false);
-            Scribe_Values.Look<bool>(ref IsPreferredEnabled, "PathAvoid.IsPreferredEnabled", true, false);
 
             
             bool hasLoadedSettings = false;
@@ -254,7 +221,6 @@ namespace PathAvoid
                 else
                     SettingsController.PathAvoidDefNameValue.Clear();
             }
-            SetIsPreferEnabled();
         }
 
         public static void ApplyLocation()
@@ -269,16 +235,6 @@ namespace PathAvoid
                         break;
                     }
                 }
-            }
-        }
-
-        public static void SetIsPreferEnabled()
-        {
-            var game = Current.Game;
-            if (game != null)
-            {
-                var rules = game.GetType().GetField("rules", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(game) as GameRules;
-                rules?.SetAllowDesignator(typeof(Designator_PathAvoid_Prefer), IsPreferredEnabled);
             }
         }
     }

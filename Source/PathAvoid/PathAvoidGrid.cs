@@ -52,10 +52,12 @@ namespace PathAvoid
 
         public PathAvoidGrid(Map map) : base(map)
         {
+            byte baseGridValue = SettingsController.GetBaseGridValue();
+
             this.grid = new ByteGrid(map);
             for (int i = 0; i < map.cellIndices.NumGridCells; i++)
             {
-                this.grid[i] = SettingsController.GetBaseGridValue();
+                this.grid[i] = baseGridValue;
             }
 
             drawMarked = false;
@@ -118,16 +120,10 @@ namespace PathAvoid
             this.LevelDrawers = new List<CellBoolDrawer>();
             foreach (PathAvoidDef current in DefDatabase<PathAvoidDef>.AllDefsListForReading)
             {
-                if (current.isPrefer && !Settings.IsPreferredEnabled)
-                    continue;
-
-                if (current.display)
-                {
-                    var p = new PathAvoidGrid.PathAvoidLevel();
-                    p.Initialize(this, (byte)current.level, current.color);
-                    CellBoolDrawer item = new CellBoolDrawer(p, this.map.Size.x, this.map.Size.z);
-                    this.LevelDrawers.Add(item);
-                }
+                var p = new PathAvoidGrid.PathAvoidLevel();
+                p.Initialize(this, (byte)current.level, current.color);
+                CellBoolDrawer item = new CellBoolDrawer(p, this.map.Size.x, this.map.Size.z);
+                this.LevelDrawers.Add(item);
             }
         }
 
