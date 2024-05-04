@@ -129,29 +129,4 @@ namespace PathAvoid
             Initialize(DefDatabase<PathAvoidDef>.GetNamed("PathAvoidStrong"));
         }
     }
-
-    public class Designator_MapSettings : ADesignator_PathAvoid
-    {
-        private MapSettingsDef def;
-
-        public override Color IconDrawColor => Color.white;
-
-        public override string Label => this.def.name;
-
-        public Designator_MapSettings()
-        {
-            this.def = DefDatabase<MapSettingsDef>.GetNamed("PathAvoidMapSettings");
-            icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
-            hotKey = def.hotKey;
-            useMouseIcon = true;
-            soundDragSustain = SoundDefOf.Designate_DragStandard;
-            soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
-        }
-
-        public override void Selected()
-        {
-            base.Selected();
-            Find.WindowStack.Add(new MapSettingsDialog());
-        }
-    }
 }

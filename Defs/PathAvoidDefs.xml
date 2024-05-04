@@ -40,9 +40,4 @@
     <colorOfIcon>(255,0,0)</colorOfIcon>
     <hotKey>Misc5</hotKey>
   </PathAvoid.PathAvoidDef>
-  <PathAvoid.MapSettingsDef>
-    <defName>PathAvoidMapSettings</defName>
-    <name>Map Settings</name>
-    <hotKey>Misc6</hotKey>
-  </PathAvoid.MapSettingsDef>
 </Defs>
