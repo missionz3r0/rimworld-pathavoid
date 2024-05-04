@@ -8,12 +8,11 @@ namespace PathAvoid
 {
     public class SettingsController : Mod
     {
-        public static bool AdvancedModeEnabled = false;
         public static Dictionary<string, string> PathAvoidDefNameValue = new Dictionary<string, string>();
 
         public SettingsController(ModContentPack content) : base(content)
         {
-            base.GetSettings<Settings>();
+            GetSettings<Settings>();
         }
 
         public override string SettingsCategory()
@@ -42,7 +41,7 @@ namespace PathAvoid
             return 0;
         }
 
-        public override void DoSettingsWindowContents(Rect rect)
+        public override void DoSettingsWindowContents(Rect inRect)
         {
             GUI.BeginGroup(new Rect(0, 60, 600, 400));
             Text.Font = GameFont.Medium;
@@ -76,80 +75,77 @@ namespace PathAvoid
             }
 
             Widgets.Label(new Rect(0, 160, 150, 22), "Advanced Settings: ");
-            Widgets.Checkbox(new Vector2(150, 159), ref AdvancedModeEnabled);
 
-            if (AdvancedModeEnabled)
+            int y = 200;
+
+            Widgets.Label(new Rect(20, y, 250, 22), "Enable Preferred (restart required)");
+            bool b = Settings.IsPreferredEnabled;
+            Widgets.Checkbox(new Vector2(260, y), ref Settings.IsPreferredEnabled);
+            if (b != Settings.IsPreferredEnabled)
             {
-                int y = 200;
-
-                Widgets.Label(new Rect(20, y, 250, 22), "Enable Preferred (restart required)");
-                bool b = Settings.IsPreferredEnabled;
-                Widgets.Checkbox(new Vector2(260, y), ref Settings.IsPreferredEnabled);
-                if (b != Settings.IsPreferredEnabled)
+                foreach(PathAvoidDef d in DefDatabase<PathAvoidDef>.AllDefs)
                 {
-                    foreach(PathAvoidDef d in DefDatabase<PathAvoidDef>.AllDefs)
+                    if (d.defName.Equals("PathAvoidPrefer"))
                     {
-                        if (d.defName.Equals("PathAvoidPrefer"))
-                        {
-                            d.display = Settings.IsPreferredEnabled;
-                            break;
-                        }
-                    }
-
-                    if (Settings.IsPreferredEnabled)
-                    {
-                        if (PathAvoidDefNameValue.ContainsKey("Prefer"))
-                            PathAvoidDefNameValue["Prefer"] = "0";
-                        if (PathAvoidDefNameValue.ContainsKey("Normal"))
-                            PathAvoidDefNameValue["Normal"] = "10";
-                    }
-                    else
-                    {
-                        if (PathAvoidDefNameValue.ContainsKey("Normal"))
-                            PathAvoidDefNameValue["Normal"] = "0";
+                        d.display = Settings.IsPreferredEnabled;
+                        break;
                     }
                 }
-                y += 30;
 
-                IEnumerable<PathAvoidDef> avoidPathDefs = DefDatabase<PathAvoidDef>.AllDefs;
-                if (PathAvoidDefNameValue.Count == 0)
+                if (Settings.IsPreferredEnabled)
                 {
-                    foreach (PathAvoidDef current in avoidPathDefs)
-                        PathAvoidDefNameValue.Add(current.name, current.level.ToString());
+                    if (PathAvoidDefNameValue.ContainsKey("Prefer"))
+                        PathAvoidDefNameValue["Prefer"] = "0";
+                    if (PathAvoidDefNameValue.ContainsKey("Normal"))
+                        PathAvoidDefNameValue["Normal"] = "10";
                 }
-
-                foreach (PathAvoidDef current in avoidPathDefs)
+                else
                 {
-                    if (!Settings.IsPreferredEnabled && current.isPrefer)
-                        continue;
-
-                    Widgets.Label(new Rect(20, y, 50, 22), current.name);
-
-                    if (PathAvoidDefNameValue.TryGetValue(current.name, out string v))
-                    {
-                        v = Widgets.TextField(new Rect(80, y, 50, 22), v);
-
-                        PathAvoidDefNameValue[current.name] = v;
-                    }
-                    else
-                    {
-                        PathAvoidDefNameValue.Add(current.name, current.level.ToString());
-                    }
-                    y += 30;
-                }
-
-                if (Widgets.ButtonText(new Rect(40, y, 60, 22), "Apply"))
-                {
-                    ApplyLevelSettings(avoidPathDefs);
-                    Messages.Message("Settings Applied", MessageTypeDefOf.PositiveEvent);
-                }
-                if (Widgets.ButtonText(new Rect(140, y, 60, 22), "Default"))
-                {
-                    SetDefaults(PathAvoidDefNameValue);
-                    ApplyLevelSettings(avoidPathDefs);
-                    Messages.Message("Default Settings Applied", MessageTypeDefOf.PositiveEvent);
+                    if (PathAvoidDefNameValue.ContainsKey("Normal"))
+                        PathAvoidDefNameValue["Normal"] = "0";
                 }
             }
+            y += 30;
+
+            IEnumerable<PathAvoidDef> avoidPathDefs = DefDatabase<PathAvoidDef>.AllDefs;
+            if (PathAvoidDefNameValue.Count == 0)
+            {
+                foreach (PathAvoidDef current in avoidPathDefs)
+                    PathAvoidDefNameValue.Add(current.name, current.level.ToString());
+            }
+
+            foreach (PathAvoidDef current in avoidPathDefs)
+            {
+                if (!Settings.IsPreferredEnabled && current.isPrefer)
+                    continue;
+
+                Widgets.Label(new Rect(20, y, 50, 22), current.name);
+
+                if (PathAvoidDefNameValue.TryGetValue(current.name, out string v))
+                {
+                    v = Widgets.TextField(new Rect(80, y, 50, 22), v);
+
+                    PathAvoidDefNameValue[current.name] = v;
+                }
+                else
+                {
+                    PathAvoidDefNameValue.Add(current.name, current.level.ToString());
+                }
+                y += 30;
+            }
+
+            if (Widgets.ButtonText(new Rect(40, y, 60, 22), "Apply"))
+            {
+                ApplyLevelSettings(avoidPathDefs);
+                Messages.Message("Settings Applied", MessageTypeDefOf.PositiveEvent);
+            }
+            if (Widgets.ButtonText(new Rect(140, y, 60, 22), "Default"))
+            {
+                SetDefaults(PathAvoidDefNameValue);
+                ApplyLevelSettings(avoidPathDefs);
+                Messages.Message("Default Settings Applied", MessageTypeDefOf.PositiveEvent);
+            }
+
             GUI.EndGroup();
         }
 
@@ -204,58 +200,45 @@ namespace PathAvoid
 
     class Settings : ModSettings
     {
-        private const string VERSION = "1.0";
+        private const string VERSION = "1.5";
         public static string ButtonLocationString = "0";
-        public static bool IsPreferredEnabled = false;
+        public static bool IsPreferredEnabled = true;
 
         public override void ExposeData()
         {
             base.ExposeData();
 
-            if (Scribe.mode == LoadSaveMode.Saving)
-            {
-                if (!SettingsController.AdvancedModeEnabled)
-                    IsPreferredEnabled = false;
-            }
-
             string version = VERSION;
             Scribe_Values.Look<string>(ref version, "PathAvoid.Version", null, true);
             Scribe_Values.Look<string>(ref ButtonLocationString, "PathAvoid.ButtonOrder", "0", false);
-            Scribe_Values.Look<bool>(ref SettingsController.AdvancedModeEnabled, "PathAvoice.AdvancedModeEnabled", false, false);
-            Scribe_Values.Look<bool>(ref IsPreferredEnabled, "PathAvoid.IsPreferredEnabled", false, false);
+            Scribe_Values.Look<bool>(ref IsPreferredEnabled, "PathAvoid.IsPreferredEnabled", true, false);
+
             
+            bool hasLoadedSettings = false;
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
-                if (version == null || !version.Equals(VERSION))
+                if (version != null && version.Equals(VERSION))
                 {
-                    SettingsController.AdvancedModeEnabled = false;
-                }
-            }
+                    Dictionary<string, string> d = new Dictionary<string, string>();
+                    SettingsController.SetDefaults(d);
 
-            if (SettingsController.AdvancedModeEnabled)
-            {
-                Dictionary<string, string> d = new Dictionary<string, string>();
-                SettingsController.SetDefaults(d);
-
-                foreach (KeyValuePair<string, string> kv in d)
-                {
-                    int value = int.Parse(kv.Value);
-                    if (SettingsController.PathAvoidDefNameValue.ContainsKey(kv.Key))
+                    foreach (KeyValuePair<string, string> kv in d)
                     {
-                        int.TryParse(SettingsController.PathAvoidDefNameValue[kv.Key], out value);
-                    }
+                        int value = int.Parse(kv.Value);
+                        if (SettingsController.PathAvoidDefNameValue.ContainsKey(kv.Key))
+                        {
+                            int.TryParse(SettingsController.PathAvoidDefNameValue[kv.Key], out value);
+                        }
 
-                    Scribe_Values.Look<int>(ref value, "PathAvoid." + kv.Key, int.Parse(kv.Value), false);
+                        Scribe_Values.Look<int>(ref value, "PathAvoid." + kv.Key, int.Parse(kv.Value), false);
 
-                    if (Scribe.mode != LoadSaveMode.Saving)
-                    {
-                        SettingsController.SetValue(SettingsController.PathAvoidDefNameValue, kv.Key, value.ToString());
+                        if (Scribe.mode != LoadSaveMode.Saving)
+                        {
+                            SettingsController.SetValue(SettingsController.PathAvoidDefNameValue, kv.Key, value.ToString());
+                        }
                     }
+                    hasLoadedSettings = true;
                 }
-            }
-            else // Not advanced mode
-            {
-                IsPreferredEnabled = false;
             }
 
             if (SettingsController.PathAvoidDefNameValue == null)
@@ -266,14 +249,10 @@ namespace PathAvoid
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 ApplyLocation();
-                if (!SettingsController.AdvancedModeEnabled)
-                {
-                    SettingsController.PathAvoidDefNameValue.Clear();
-                }
-                else
-                {
+                if (hasLoadedSettings)
                     SettingsController.ApplyLevelSettings(DefDatabase<PathAvoidDef>.AllDefs);
-                }
+                else
+                    SettingsController.PathAvoidDefNameValue.Clear();
             }
             SetIsPreferEnabled();
         }

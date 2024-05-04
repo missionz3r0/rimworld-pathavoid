@@ -9,18 +9,18 @@ namespace PathAvoid
         private SortedDictionary<string, TerrainDef> terrain = new SortedDictionary<string, TerrainDef>();
         private SortedDictionary<int, PathAvoidDef> pathAvoidOptions = new SortedDictionary<int, PathAvoidDef>();
 
-        private TerrainDef selectedTerrainDef = null;
-        private PathAvoidDef selectedPathAvoidDef = null;
+        private TerrainDef selectedTerrainDef;
+        private PathAvoidDef selectedPathAvoidDef;
 
-        private PathAvoidDef selectedPathAvoidDefForReset = null;
+        private PathAvoidDef selectedPathAvoidDefForReset;
         public override Vector2 InitialSize => new Vector2(500f, 600f);
 
         public MapSettingsDialog()
         {
-            base.doCloseButton = true;
-            base.doCloseX = true;
-            base.forcePause = true;
-            base.absorbInputAroundWindow = true;
+            doCloseButton = true;
+            doCloseX = true;
+            forcePause = true;
+            absorbInputAroundWindow = true;
 
             var grid = Current.Game.CurrentMap.terrainGrid.topGrid;
             for (int i = 0; i < grid.Length; ++i)

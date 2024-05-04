@@ -23,23 +23,24 @@ namespace PathAvoid
             }
         }
 
-        public override AcceptanceReport CanDesignateCell(IntVec3 c)
+        protected ADesignator_PathAvoid() { }
+
+        public override AcceptanceReport CanDesignateCell(IntVec3 loc)
         {
-            if (!c.InBounds(base.Map))
+            if (!loc.InBounds(Map))
             {
                 return false;
             }
             return true;
         }
-        public ADesignator_PathAvoid() { }
 
         protected virtual void Initialize(PathAvoidDef def)
         {
-            base.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
-            base.hotKey = def.hotKey;
-            base.useMouseIcon = true;
-            base.soundDragSustain = SoundDefOf.Designate_DragStandard;
-            base.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
+            hotKey = def.hotKey;
+            useMouseIcon = true;
+            soundDragSustain = SoundDefOf.Designate_DragStandard;
+            soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
         }
     }
 
@@ -61,11 +62,11 @@ namespace PathAvoid
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            PathAvoidGrid pathAvoidGrid = base.Map.GetComponent<PathAvoidGrid>();
+            PathAvoidGrid pathAvoidGrid = Map.GetComponent<PathAvoidGrid>();
             if (pathAvoidGrid == null)
             {
-                pathAvoidGrid = new PathAvoidGrid(base.Map);
-                base.Map.components.Add(pathAvoidGrid);
+                pathAvoidGrid = new PathAvoidGrid(Map);
+                Map.components.Add(pathAvoidGrid);
             }
             pathAvoidGrid.SetValue(c, (byte)this.def.level);
         }
@@ -73,12 +74,12 @@ namespace PathAvoid
         public override void SelectedUpdate()
         {
             GenUI.RenderMouseoverBracket();
-            PathAvoidGrid pathAvoidGrid = base.Map.GetComponent<PathAvoidGrid>();
+            PathAvoidGrid pathAvoidGrid = Map.GetComponent<PathAvoidGrid>();
             bool flag = pathAvoidGrid == null;
             if (flag)
             {
-                pathAvoidGrid = new PathAvoidGrid(base.Map);
-                base.Map.components.Add(pathAvoidGrid);
+                pathAvoidGrid = new PathAvoidGrid(Map);
+                Map.components.Add(pathAvoidGrid);
             }
             pathAvoidGrid.MarkForDraw();
         }
@@ -140,11 +141,11 @@ namespace PathAvoid
         public Designator_MapSettings()
         {
             this.def = DefDatabase<MapSettingsDef>.GetNamed("PathAvoidMapSettings");
-            base.icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
-            base.hotKey = def.hotKey;
-            base.useMouseIcon = true;
-            base.soundDragSustain = SoundDefOf.Designate_DragStandard;
-            base.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/PathAvoid", true);
+            hotKey = def.hotKey;
+            useMouseIcon = true;
+            soundDragSustain = SoundDefOf.Designate_DragStandard;
+            soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
         }
 
         public override void Selected()

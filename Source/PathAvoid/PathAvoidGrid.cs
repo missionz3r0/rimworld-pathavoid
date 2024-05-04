@@ -23,7 +23,6 @@ namespace PathAvoid
                     return this.color;
                 }
             }
-            public PathAvoidLevel() { }
 
             public void Initialize(PathAvoidGrid grid, byte level, Color color)
             {
@@ -49,7 +48,7 @@ namespace PathAvoid
 
         private List<CellBoolDrawer> LevelDrawers;
 
-        private bool drawMarked = false;
+        private bool drawMarked;
 
         public PathAvoidGrid(Map map) : base(map)
         {
@@ -58,6 +57,8 @@ namespace PathAvoid
             {
                 this.grid[i] = SettingsController.GetBaseGridValue();
             }
+
+            drawMarked = false;
         }
 
         public override void ExposeData()
@@ -75,13 +76,13 @@ namespace PathAvoid
                     if (!list.Contains(this.grid[i]))
                     {
                         byte b = list[0];
-                        int num = Math.Abs((int)(b - this.grid[i]));
+                        int num = Math.Abs(b - this.grid[i]);
                         foreach (byte current2 in list)
                         {
-                            if (Math.Abs((int)(current2 - this.grid[i])) < num)
+                            if (Math.Abs(current2 - this.grid[i]) < num)
                             {
                                 b = current2;
-                                num = Math.Abs((int)(b - this.grid[i]));
+                                num = Math.Abs(b - this.grid[i]);
                             }
                         }
                         this.grid[i] = b;
