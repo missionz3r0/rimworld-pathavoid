@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <DesignationDef>
+    <defName>PathAvoid_Prefer</defName>
+    <texturePath>Designations/PathAvoid</texturePath>
+    <targetType>Cell</targetType>
+  </DesignationDef>
+
+  <DesignationDef>
+    <defName>PathAvoid_Normal</defName>
+    <texturePath>Designations/PathAvoid</texturePath>
+    <targetType>Cell</targetType>
+  </DesignationDef>
+
+  <DesignationDef>
+    <defName>PathAvoid_Dislike</defName>
+    <texturePath>Designations/PathAvoid</texturePath>
+    <targetType>Cell</targetType>
+  </DesignationDef>
+
+  <DesignationDef>
+    <defName>PathAvoid_Hate</defName>
+    <texturePath>Designations/PathAvoid</texturePath>
+    <targetType>Cell</targetType>
+  </DesignationDef>
+
+  <DesignationDef>
+    <defName>PathAvoid_Strong</defName>
+    <texturePath>Designations/PathAvoid</texturePath>
+    <targetType>Cell</targetType>
+  </DesignationDef>
+</Defs>

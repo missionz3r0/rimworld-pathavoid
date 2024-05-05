@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <DesignationCategoryDef>
-    <defName>Pathing</defName>
+    <defName>PathAvoid_Pathing</defName>
     <label>pathing</label>
-    <description>Allows you to customize pathing</description>
     <order>0</order>
-    <showPowerGrid>false</showPowerGrid>
+    <description>Allows you to customize pathing</description>
     <specialDesignatorClasses>
       <li>PathAvoid.Designator_PathAvoid_Prefer</li>
       <li>PathAvoid.Designator_PathAvoid_Normal</li>

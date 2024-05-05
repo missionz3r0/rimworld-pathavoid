@@ -22,23 +22,7 @@ namespace PathAvoid
 
         public static byte GetBaseGridValue()
         {
-            foreach (PathAvoidDef d in DefDatabase<PathAvoidDef>.AllDefs)
-            {
-                if (d.defName.Equals("PathAvoidNormal"))
-                {
-                    return (byte)d.level;
-                }
-            }
-
-            if (PathAvoidDefNameValue.TryGetValue("Normal", out string s))
-            {
-                if (byte.TryParse(s, out byte v))
-                {
-                    return v;
-                }
-            }
-
-            return 0;
+            return 10;
         }
 
         public override void DoSettingsWindowContents(Rect inRect)

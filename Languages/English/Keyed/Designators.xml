@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <PathAvoid.DesignatorPrefer>Prefer</PathAvoid.DesignatorPrefer>
+  <PathAvoid.DesignatorNormal>Normal</PathAvoid.DesignatorNormal>
+  <PathAvoid.DesignatorDislike>Dislike</PathAvoid.DesignatorDislike>
+  <PathAvoid.DesignatorHate>Hate</PathAvoid.DesignatorHate>
+  <PathAvoid.DesignatorStrong>Strong</PathAvoid.DesignatorStrong>
+</LanguageData>
